@@ -40,3 +40,13 @@ jobs:
 
       - name: Run Data Cleaner
         run: python JobsForLebanon_Data_Cleaner.py
+
+      - name: Commit and Push both CSV files
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add JobsForLebanon.csv cleaned_jobs.csv
+          git commit -m "Update both scraped and cleaned job data"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
