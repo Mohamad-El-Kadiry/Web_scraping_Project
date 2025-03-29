@@ -1,15 +1,9 @@
 import time
-import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from fake_useragent import UserAgent
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.support.ui import WebDriverWait  # Corrected import
-from selenium.webdriver.support import expected_conditions as EC  # Corrected import
-
 
 def setup_driver():
     options = Options()
