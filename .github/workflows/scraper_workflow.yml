@@ -23,6 +23,16 @@ jobs:
       - name: Run Scraper
         run: python JobsForLebanon_Scraper.py
 
+      - name: Commit and Push the raw data CSV
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add JobsForLebanon.csv
+          git commit -m "Update raw job data"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   run-cleaner:
     needs: run-scraper  # Waits for scraper to finish
     runs-on: ubuntu-latest
@@ -41,12 +51,12 @@ jobs:
       - name: Run Data Cleaner
         run: python JobsForLebanon_Data_Cleaner.py
 
-      - name: Commit and Push both CSV files
+      - name: Commit and Push the cleaned data CSV
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add JobsForLebanon.csv cleaned_jobs.csv
-          git commit -m "Update both scraped and cleaned job data"
+          git add cleaned_jobs.csv
+          git commit -m "Update cleaned job data"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
